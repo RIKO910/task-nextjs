@@ -3,9 +3,8 @@ import React from 'react';
 const Item = () => {
     return (
         <div className="pb-20 ml-7">
-            <h1 className="text-3xl">Recent Lost Item Reports</h1>
+            <h1 className="text-3xl pb-7">Recent Lost Item Reports</h1>
             <div className="grid grid-cols-3 gap-4">
-
                 <div className="card bg-base-100 shadow-xl">
                     <figure>
                         <img
