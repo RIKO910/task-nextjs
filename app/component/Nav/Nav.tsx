@@ -3,7 +3,7 @@ import './Nav.css';
 const Nav = () => {
     return (
         <div  className="shadow-lg  p-1">
-            <div className="mx-64">
+            <div className="mx-16">
                 <div className="flex justify-between items-center my-3 ">
                     <div className="flex items-center">
                         <img

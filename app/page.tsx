@@ -7,7 +7,8 @@ import Item from "@/app/component/Item/Item";
 
 export default function Home() {
   return (
-    <div className='mx-96'>
+    //   mx- any you can use
+    <div className='mx-36'>
             <Hero></Hero>
         <Testimonial></Testimonial>
         <Tip></Tip>
