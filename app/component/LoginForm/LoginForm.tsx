@@ -1,9 +1,10 @@
 'use client'
-import React from 'react';
 import Link from "next/link";
+import React, { FormEvent } from 'react';
+
 const LoginForm = () => {
-    const formHandeling = (e) =>{
-        e.preventDefault()
+    const formHandeling = (e: FormEvent) => {
+        e.preventDefault();
     }
 
     return (
