@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AboutUs = () => {
+const Management = () => {
     return (
         <div>
-            
+dcchgsjasdck
         </div>
     );
 };
 
-export default AboutUs;
+export default Management;

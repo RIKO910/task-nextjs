@@ -1,5 +1,6 @@
 import React from 'react';
 import './Nav.css';
+import Link from "next/link";
 const Nav = () => {
     return (
         <div  className="shadow-lg  p-1">
@@ -11,11 +12,12 @@ const Nav = () => {
                             className="logo-img"
                         />
 
-                        <a className="ml-4 font">Home</a>
-                        <a className="ml-4 font">About Us</a>
+                        <Link className="ml-4 font" href='/'>Home</Link>
+                        <Link className="ml-4 font" href='/AboutUs'>About Us</Link>
+                        <Link className="ml-4 font" href='/dashboard'>Dashboard</Link>
                     </div>
                     <div>
-                        <a className="font">Home</a>
+                        <Link className="font" href='/Login'>Login</Link>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,28 @@
+form{
+    margin-right: auto;
+    margin-left: auto;
+    width: 37%;
+}
+.button {
+    background-color: #0088D1;
+    border: none;
+    color: white;
+    padding: 7px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 2px 4px 2px;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 5px;
+}
+.login{
+    text-align: center;
+}
+.loginLogo{
+    margin-left: 50%;
+}
+.sign{
+    color: #1486FD;
+}
