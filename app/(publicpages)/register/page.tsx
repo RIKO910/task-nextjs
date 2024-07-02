@@ -19,7 +19,7 @@ const Page = () => {
                 </div>
                 <h1 className="text-3xl ml-7 login">Registration</h1>
             </div>
-            <RegisterForm></RegisterForm>
+            <RegisterForm/>
         </div>
     );
 };

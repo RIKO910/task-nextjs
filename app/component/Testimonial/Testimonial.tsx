@@ -1,10 +1,12 @@
 import React from 'react';
 import './Testimonial.css';
+import Title from "@/app/component/Title/Title";
 
 const Testimonial = () => {
     return (
         <div className="pt-16">
-            <h1 className="text-3xl ml-7">Testimonials</h1>
+            <Title title='Testimonials' className="ml-7"/>
+            {/*<h1 className="text-3xl ml-7">Testimonials</h1>*/}
             <div className="grid grid-cols-2 mt-4">
                 <div className="card card-side bg-base-100 shadow-xl">
                     <figure>

@@ -1,9 +1,10 @@
 import React from 'react';
+import Title from "@/app/component/Title/Title";
 
 const About = () => {
     return (
         <div className="pb-20">
-            <h1 className="text-3xl ml-7">Testimonials</h1>
+            <Title title='About us' className="ml-7"/>
             <div className="grid grid-cols-2">
                 <div>
                     <p className="text-1xl font-bold mt-5">Purpose And Mission</p>

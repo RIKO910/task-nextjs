@@ -1,13 +1,14 @@
 import React from 'react';
 import {RiErrorWarningFill} from "react-icons/ri";
 import Image from "next/image";
+import Title from "@/app/component/Title/Title";
 
 const Tip = () => {
     return (
         <div className="py-20">
-            <h1 className="text-3xl ml-7 ">Tips</h1>
+            <Title title='Tips' className="ml-7"/>
             <div className=" bg-base-100 shadow-xl ">
-               <p className="text-2xl px-7 py-10">Tips for Reporting Lost or Found Items</p>
+                <Title title='Tips for Reporting Lost or Found Items' className=" px-7 py-10" size='md' />
                 <div className="grid grid-cols-2 px-7 pb-10">
                     <div>
                         <div

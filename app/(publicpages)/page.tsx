@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Hero from "@/app/component/Hero/Hero";
 import Testimonial from "@/app/component/Testimonial/Testimonial";

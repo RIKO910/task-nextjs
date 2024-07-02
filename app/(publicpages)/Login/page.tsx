@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import './Login.css';
 import { FaLock } from "react-icons/fa";
