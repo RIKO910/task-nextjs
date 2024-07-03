@@ -1,16 +1,68 @@
 'use client';
 
-import React from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import Title from "@/app/component/Title/Title";
 import './Claim.css'
+import AllClaim from "@/app/component/Profile/AllClaim/AllClaim";
 
 const ClaimsPage = () => {
+    // Show Modal
     const openModal = () => {
         const modal = document.getElementById('my_modal_3');
         if (modal) {
             modal.showModal();
         }
     };
+
+    // Claim Item Create
+
+    const [fieldData, setFieldData] = useState({
+        claim: "",
+        feature: "",
+        date: "",
+    });
+
+    const [message, setMessage] = useState('');
+
+    const formHandling = async (e: FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('/api/claimpost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    claim: fieldData.claim,
+                    feature: fieldData.feature,
+                    date: fieldData.date,
+                }),
+            });
+
+            if (response.ok) {
+                setMessage('Data create successful');
+                // Reset form fields
+                setFieldData({
+                    claim: "",
+                    feature: "",
+                    date: "",
+                });
+            } else {
+                const data = await response.json();
+                setMessage(`Create failed: ${data.error}`);
+            }
+        } catch (error) {
+            setMessage('An error occurred');
+        }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFieldData({ ...fieldData, [name]: value });
+    };
+
+
     return (
         <div>
             <div className="flex justify-between">
@@ -27,31 +79,26 @@ const ClaimsPage = () => {
                             </form>
                             <h3 className="font-bold text-lg">Claim a found item</h3>
                             <hr/>
-                            <form className="my-4">
-                                <select className="select select-bordered w-full max-w-xs">
+                            <form onSubmit={formHandling} className="my-4">
+                                <select name="claim" onChange={handleInputChange}  className="select select-bordered w-full max-w-xs">
                                     <option disabled selected>Claim item</option>
-                                    <option>Bike</option>
-                                    <option>Mobile phone</option>
-                                    <option>Wallet</option>
+                                    <option value="Bike">Bike</option>
+                                    <option value="Mobile phone">Mobile phone</option>
+                                    <option value="Wallet">Wallet</option>
                                 </select>
-                                <input type="text" placeholder="DIStinguish features"
+                                <input name="feature" onChange={handleInputChange} type="text" placeholder="DIStinguish features"
                                        className="input my-2 input-bordered w-full max-w-xs"/>
-                                <input type="date" placeholder="DIStinguish features"
+                                <input name="date" onChange={handleInputChange} type="date" placeholder="DIStinguish features"
                                        className="input input-bordered w-full max-w-xs"/>
                                 <br/>
-                                <button type='button' className="button">ADD</button>
+                                <button type='submit' className="button">ADD</button>
                             </form>
                         </div>
                     </dialog>
                 </div>
             </div>
-            <div className="grid grid-cols-3 gap-4 mt-4">
-                <div className="bg-base-100 border-2 rounded-md p-5">
-                <p className="w-fit bg-[#1486FD] rounded-full px-3 py-1 text-white text-sm">PENDING</p>
-                    <Title title="Bike" size="md" />
-                    <Title title="aqwsed" size="sm" className="mt-2" />
-                    <Title title="Found By, nayeem, Email: nayeem@gmail.com" size="sm" className="mt-1 text-sm" />
-                </div>
+            <div className="">
+                <AllClaim></AllClaim>
             </div>
         </div>
     );

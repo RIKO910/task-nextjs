@@ -22,3 +22,10 @@ model User {
   bio_information String
   age             Int
 }
+
+model Claim {
+  id      Int      @id @default(autoincrement())
+  claim   String
+  feature String
+  date    DateTime
+}
