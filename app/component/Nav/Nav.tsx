@@ -31,6 +31,9 @@ const Nav: React.FC = () => {
                         <Link className="ml-4 font" href="/AboutUs">
                             About Us
                         </Link>
+                        <Link className="ml-4 font" href="/profile/claims">
+                            Profile
+                        </Link>
                         {isAuthenticated && (
                             <Link className="ml-4 font" href="/dashboard">
                                 Dashboard

@@ -1,0 +1,13 @@
+.contain{
+    height: 212px;
+    width: 100%;
+    background-color: #87CEEB;
+    border-radius: 7px;
+    padding: 10px;
+}
+.avatar{
+   display: flex;
+    justify-content: center;
+    margin-top: 15%;
+}
+

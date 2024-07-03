@@ -41,7 +41,7 @@ const Management = () => {
                         <tr key={user.id}>
                             <th>{index + 1}</th>
                             <td>{user.name}</td>
-                            <td>{user.username}</td>
+                            <td>{user.user_name}</td>
                             <td>{user.email}</td>
                             <td>
                                 <select

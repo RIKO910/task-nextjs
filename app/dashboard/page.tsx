@@ -1,9 +1,10 @@
 import React from 'react';
+import Pie from "@/app/dashboard/pie/Pie";
 
 const DashboardPage = () => {
     return (
         <div>
-dashboard
+            {/*<Pie></Pie>*/}
         </div>
     );
 };
