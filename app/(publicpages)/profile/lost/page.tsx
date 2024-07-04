@@ -3,7 +3,8 @@
 import React, {FormEvent, useState} from 'react';
 import Title from "@/app/component/Title/Title";
 import './lost.css'
-import AllLost from "@/app/component/Profile/AllLost/AllLost";
+import AllLost from "@/app/component/Profile/Lost/AllLost/AllLost";
+import Lost from "@/app/component/Profile/Lost/lost";
 const LostPage = () => {
     const openModal = () => {
         const modal = document.getElementById('my_modal');
@@ -120,7 +121,7 @@ const LostPage = () => {
                 </div>
             </div>
             <div>
-               <AllLost></AllLost>
+               <Lost></Lost>
             </div>
         </div>
     );
