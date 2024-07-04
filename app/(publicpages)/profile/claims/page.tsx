@@ -15,7 +15,6 @@ const ClaimsPage = () => {
     };
 
     // Claim Item Create
-
     const [fieldData, setFieldData] = useState({
         claim: "",
         feature: "",
