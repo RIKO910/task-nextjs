@@ -3,8 +3,8 @@
 import React, {FormEvent, useState} from 'react';
 import Title from "@/app/component/Title/Title";
 import './lost.css'
-import AllLost from "@/app/component/Profile/Lost/AllLost/AllLost";
-import Lost from "@/app/component/Profile/Lost/lost";
+import Lost from "@/app/component/Profile/Lost/Lost";
+
 const LostPage = () => {
     const openModal = () => {
         const modal = document.getElementById('my_modal');

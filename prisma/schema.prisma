@@ -41,14 +41,14 @@ model Lost {
   date        DateTime
 }
 
-// model Found {
-//   id            Int      @id @default(autoincrement())
-//   found_name    String
-//   category      String
-//   description   String
-//   location      String
-//   email         String
-//   claim_process String
-//   date          DateTime
-//   phone         String
-// }
+model Found {
+  id            Int      @id @default(autoincrement())
+  found_name    String
+  category      String
+  description   String
+  location      String
+  email         String
+  claim_process String
+  date          DateTime
+  phone         String
+}

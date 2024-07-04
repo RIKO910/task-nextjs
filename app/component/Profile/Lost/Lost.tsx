@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AllLost from '@/app/component/Profile/Lost/AllLost/AllLost';
 import UpdateLost from '@/app/component/Profile/Lost/UpdateLost/UpdateLost';
 
-const LostItemsPage = () => {
+const Lost = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedLostItem, setSelectedLostItem] = useState(null);
 
@@ -25,4 +25,4 @@ const LostItemsPage = () => {
     );
 };
 
-export default LostItemsPage;
+export default Lost;
