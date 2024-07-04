@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import Title from "@/app/component/Title/Title";
+import { MdDelete } from "react-icons/md";
+import { MdEditNote } from "react-icons/md";
+
 import {format} from "date-fns";
 
 const AllLost = () => {
@@ -32,7 +34,15 @@ const AllLost = () => {
         <div className="grid grid-cols-3 gap-4 mt-4">
             {allLost.map((data, index) => (
                 <div key={data.id} className="bg-base-100 border-2 rounded-md p-5">
-                    <p className="w-fit bg-[#1486FD] rounded-full px-3 py-1 text-white text-sm">PENDING</p>
+                    <div className="flex justify-between">
+                        <div>
+                            <p className="w-fit bg-[#1486FD] rounded-full px-3 py-1 text-white text-sm">PENDING</p>
+                        </div>
+                        <div className="flex">
+                            <MdDelete className=" mr-3 text-2xl" />
+                            <MdEditNote className="text-2xl"/>
+                        </div>
+                    </div>
                     <h1 className="text-2xl mt-2">{data.lost_name}</h1>
                     <h1 className="text-sm mt-2">{data.description}</h1>
                     <h1 className="text-sm mt-2">{format(new Date(data.date), 'MMMM dd, yyyy')}</h1>
