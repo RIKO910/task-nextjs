@@ -8,6 +8,7 @@ import Item from "@/app/component/Item/Item";
 import Foot from "@/app/component/Foot/foot";
 import Footer from "@/app/component/Footer/Footer";
 
+
 export default function Home() {
     return (
         //   mx- any you can use

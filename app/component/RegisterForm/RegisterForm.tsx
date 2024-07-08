@@ -1,6 +1,30 @@
 'use client';
 import React, { FormEvent, useState } from 'react';
 import Link from 'next/link';
+import {z} from "zod";
+import {ZodValidate} from "@/app/lib/zod/validateError";
+import api from "@/app/lib/axios";
+import {setAccessToken} from "@/src/action/authAction";
+import {AUTH_KEY} from "@/app/constant/authConstant";
+
+const registerSchema = z.object({
+    name: z.string(),
+    user_name: z.string(),
+    email: z.string().email(),
+    password: z.string().min(4),
+    confirm_password: z.string().min(4),
+    bio_information: z.string(),
+    age: z.string().transform((value=>{
+        const numberValue = parseInt(value)
+        if(numberValue){
+            return numberValue;
+        }
+        else {
+            return false;
+        }
+
+    }))
+})
 
 const RegisterForm = () => {
     const [fieldData, setFieldData] = useState({
@@ -25,40 +49,52 @@ const RegisterForm = () => {
         }
 
         try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: fieldData.name,
-                    user_name: fieldData.user_name,
-                    email: fieldData.email,
-                    password: fieldData.password,
-                    bio_information: fieldData.bio_information,
-                    age: fieldData.age,
-                }),
-            });
-
-            if (response.ok) {
-                setMessage('Registration successful');
-                // Reset form fields
-                setFieldData({
-                    name: "",
-                    user_name: "",
-                    email: "",
-                    password: "",
-                    confirm_password: "",
-                    bio_information: "",
-                    age: "",
-                });
-            } else {
-                const data = await response.json();
-                setMessage(`Registration failed: ${data.error}`);
+            const validData =ZodValidate(registerSchema,fieldData)
+            const response = await api.post('/register', validData);
+            console.log(response);
+            if(response.token){
+                setAccessToken(AUTH_KEY, response.token)
             }
-        } catch (error) {
-            setMessage('An error occurred');
+
+        }catch (error){
+            console.log(error)
         }
+
+        // try {
+        //     const response = await fetch('/api/register', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             name: fieldData.name,
+        //             user_name: fieldData.user_name,
+        //             email: fieldData.email,
+        //             password: fieldData.password,
+        //             bio_information: fieldData.bio_information,
+        //             age: fieldData.age,
+        //         }),
+        //     });
+        //
+        //     if (response.ok) {
+        //         setMessage('Registration successful');
+        //         // Reset form fields
+        //         setFieldData({
+        //             name: "",
+        //             user_name: "",
+        //             email: "",
+        //             password: "",
+        //             confirm_password: "",
+        //             bio_information: "",
+        //             age: "",
+        //         });
+        //     } else {
+        //         const data = await response.json();
+        //         setMessage(`Registration failed: ${data.error}`);
+        //     }
+        // } catch (error) {
+        //     setMessage('An error occurred');
+        // }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

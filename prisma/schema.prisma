@@ -14,13 +14,15 @@ datasource db {
 }
 
 model User {
-  id              Int    @id @default(autoincrement())
-  email           String @unique
+  id              Int     @id @default(autoincrement())
+  email           String  @unique
   name            String
   user_name       String
   password        String
   bio_information String
   age             Int
+  lostItems       Lost[]
+  foundItems      Found[]
 }
 
 model Claim {
@@ -39,6 +41,8 @@ model Lost {
   email       String
   phone       String
   date        DateTime
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Found {
@@ -51,4 +55,6 @@ model Found {
   claim_process String
   date          DateTime
   phone         String
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
 }

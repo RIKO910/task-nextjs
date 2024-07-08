@@ -1,23 +1,32 @@
 import React, {useEffect, useState} from 'react';
 import {MdDelete, MdEditNote} from "react-icons/md";
 import {format} from "date-fns";
+import {useSelector} from "react-redux";
+import {RootState} from "@/app/store/store";
 
 const AllFound = ({ openModal }) => {
     const [allFound, setAllFound] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const userId = useSelector((state: RootState) => state.auth.user?.id);
+
     useEffect(() => {
-        fetch('http://localhost:3000/api/found')
-            .then(response => response.json())
-            .then(data => {
-                setAllFound(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                setLoading(false);
-            });
-    }, []);
+        if (userId) {
+            fetch('http://localhost:3000/api/found')
+                .then(response => response.json())
+                .then(data => {
+                    // Filter data to show only items for the logged-in user
+                    const userFoundItems = data.filter(item => item.userId === userId);
+                    setAllFound(userFoundItems);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false);
+                });
+        }
+    }, [userId]);
+
 
     const deleteLostItem = async (id) => {
         try {

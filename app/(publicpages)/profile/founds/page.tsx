@@ -1,20 +1,28 @@
-"use client"
+'use client';
 
-import React, {FormEvent, useState} from 'react';
+import React, { FormEvent, useState } from 'react';
 import Title from "@/app/component/Title/Title";
 import './found.css';
 import Found from "@/app/component/Profile/Found/Found";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+
 const Page = () => {
     const openModal = () => {
         const modal = document.getElementById('my_modal');
         if (modal) {
-            modal.showModal();
+            (modal as HTMLDialogElement).showModal();
         }
     };
 
+    const closeModal = () => {
+        const modal = document.getElementById('my_modal');
+        if (modal) {
+            (modal as HTMLDialogElement).close();
+        }
+    };
 
-    // Lost item create
-
+    const userId = useSelector((state: RootState) => state.auth.user?.id);
     const [fieldData, setFieldData] = useState({
         found_name: "",
         category: "",
@@ -31,6 +39,12 @@ const Page = () => {
     const formHandling = async (e: FormEvent) => {
         e.preventDefault();
 
+        if (!userId) {
+            setMessage('User ID is required');
+            return;
+        }
+        console.log(userId);
+
         try {
             const response = await fetch('/api/found', {
                 method: 'POST',
@@ -38,20 +52,13 @@ const Page = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    found_name: fieldData.found_name,
-                    category: fieldData.category,
-                    description: fieldData.description,
-                    location: fieldData.location,
-                    email: fieldData.email,
-                    claim_process: fieldData.claim_process,
-                    phone: fieldData.phone,
-                    date: fieldData.date,
+                    ...fieldData,
+                    userId,
                 }),
             });
 
             if (response.ok) {
-                setMessage('Data create successful');
-                // Reset form fields
+                setMessage('Data created successfully');
                 setFieldData({
                     found_name: "",
                     category: "",
@@ -62,6 +69,7 @@ const Page = () => {
                     phone: "",
                     date: "",
                 });
+                closeModal(); // Close modal on successful form submission
             } else {
                 const data = await response.json();
                 setMessage(`Create failed: ${data.error}`);
@@ -71,11 +79,10 @@ const Page = () => {
         }
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFieldData({ ...fieldData, [name]: value });
     };
-
 
     return (
         <div>
@@ -88,8 +95,7 @@ const Page = () => {
                     <dialog id="my_modal" className="modal">
                         <div className="modal-box">
                             <form method="dialog">
-                                {/* if there is a button in form, it will close the modal */}
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                <button type="button" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
                             </form>
                             <h3 className="font-bold text-lg">Add a found item</h3>
                             <hr/>
@@ -116,7 +122,7 @@ const Page = () => {
                                 <input name="claim_process" onChange={handleInputChange} type="text" placeholder="Claim process"
                                        className="input mt-2 input-bordered w-full max-w-xs"/>
                                 <input name="date" onChange={handleInputChange} type="date" placeholder=""
-                                       className="input  my-2 input-bordered w-full max-w-xs"/>
+                                       className="input my-2 input-bordered w-full max-w-xs"/>
                                 <input name="phone" onChange={handleInputChange} type="text" placeholder="Phone"
                                        className="input mb-2 input-bordered w-full max-w-xs"/>
                                 <br/>
@@ -128,9 +134,10 @@ const Page = () => {
                     </dialog>
                 </div>
             </div>
-            <div >
-                   <Found></Found>
+            <div>
+                <Found />
             </div>
+            {message && <p>{message}</p>}
         </div>
     );
 };

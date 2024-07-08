@@ -1,12 +1,12 @@
-// app/component/Nav/Nav.tsx
+// component/Nav/Nav.tsx
 'use client';
 
 import React from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/app/store/store';
-import { logout } from '@/app/store/authSlice';
+import { RootState } from '@/src/redux/store';
 import './Nav.css';
+import { logout } from '@/src/redux/slices/auth';
 
 const Nav: React.FC = () => {
     const dispatch = useDispatch();
@@ -31,13 +31,16 @@ const Nav: React.FC = () => {
                         <Link className="ml-4 font" href="/AboutUs">
                             About Us
                         </Link>
-                        <Link className="ml-4 font" href="/profile/claims">
-                            Profile
-                        </Link>
+
                         {isAuthenticated && (
-                            <Link className="ml-4 font" href="/dashboard">
-                                Dashboard
-                            </Link>
+                            <>
+                                <Link className="ml-4 font" href="/profile/claims">
+                                    Profile
+                                </Link>
+                                <Link className="ml-4 font" href="/dashboard">
+                                    Dashboard
+                                </Link>
+                            </>
                         )}
                     </div>
                     <div>

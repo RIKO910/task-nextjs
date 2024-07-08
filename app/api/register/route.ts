@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
                 age: parseInt(age, 10),
             },
         });
-
-        return NextResponse.json({ data: newUser }, { status: 201 });
+        const token = `jwt-token-for`;
+        return NextResponse.json({ data: newUser ,token}, { status: 201 });
     } catch (error) {
         console.error('User registration failed:', error);
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });

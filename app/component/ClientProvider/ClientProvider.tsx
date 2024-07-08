@@ -1,18 +1,24 @@
-// app/component/ClientProvider/ClientProvider.tsx
+// components/ClientProvider.js (or ClientProvider.tsx if using TypeScript)
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { store } from '@/app/store/store';
 import Nav from '@/app/component/Nav/Nav';
+import { store } from "@/src/redux/store";
 
 const ClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <Provider store={store}>
-      <Nav />
-      {children}
-    </Provider>
-  );
+    useEffect(() => {
+        // The token initialization logic is already handled in the store setup.
+    }, []);
+
+    return (
+        <Provider store={store}>
+            <>
+                <Nav />
+                {children}
+            </>
+        </Provider>
+    );
 };
 
 export default ClientProvider;
